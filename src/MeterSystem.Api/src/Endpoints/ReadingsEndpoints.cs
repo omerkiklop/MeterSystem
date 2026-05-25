@@ -17,14 +17,21 @@ public static class ReadingsEndpoints
     private static async Task<IResult> HandleReadingsAsync(
         MeterReadingRequest request,
         ISender sender,
+        ILoggerFactory loggerFactory,
         CancellationToken ct)
     {
+        var logger = loggerFactory.CreateLogger(nameof(ReadingsEndpoints));
+
         var error = Validate(request);
         if (error is not null)
+        {
+            logger.LogWarning("Validation failed for meter {MeterNumber}: {Error}", request.MeterNumber, error);
             return Results.BadRequest(new { error });
+        }
 
         await sender.Send(new PublishReadingsCommand(ToMessage(request)), ct);
 
+        logger.LogInformation("Accepted {Count} reading(s) for meter {MeterNumber}", request.Readings!.Count, request.MeterNumber);
         return Results.Accepted();
     }
 

@@ -49,6 +49,8 @@ public sealed class MeterReadingsConsumer(
             DispatchConsumersAsync = true
         };
 
+        logger.LogInformation("Connecting to RabbitMQ at {Host}:{Port}", _rabbit.Host, _rabbit.Port);
+
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
 
@@ -59,7 +61,7 @@ public sealed class MeterReadingsConsumer(
         consumer.Received += (_, ea) => HandleMessageAsync(ea, channel, ct);
         channel.BasicConsume(_rabbit.QueueName, autoAck: false, consumer: consumer);
 
-        logger.LogInformation("Consuming queue '{Queue}'", _rabbit.QueueName);
+        logger.LogInformation("Connected. Consuming queue '{Queue}'", _rabbit.QueueName);
 
         await Task.Delay(Timeout.Infinite, ct);
     }

@@ -6,7 +6,10 @@ using RabbitMQ.Client;
 
 namespace MeterSystem.Api.Services;
 
-public sealed class RabbitMqReadingsPublisher(IConnection connection, IOptions<RabbitMqOptions> options)
+public sealed class RabbitMqReadingsPublisher(
+    IConnection connection,
+    IOptions<RabbitMqOptions> options,
+    ILogger<RabbitMqReadingsPublisher> logger)
     : IReadingsPublisher
 {
     private readonly RabbitMqOptions _options = options.Value;
@@ -27,6 +30,10 @@ public sealed class RabbitMqReadingsPublisher(IConnection connection, IOptions<R
 
         var body = JsonSerializer.SerializeToUtf8Bytes(message);
         channel.BasicPublish(exchange: "", routingKey: _options.QueueName, basicProperties: props, body: body);
+
+        logger.LogInformation(
+            "Published {Count} reading(s) for meter {MeterNumber} to queue '{Queue}' ({Bytes} bytes)",
+            message.Readings.Count, message.MeterNumber, _options.QueueName, body.Length);
 
         return Task.CompletedTask;
     }

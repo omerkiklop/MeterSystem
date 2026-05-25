@@ -25,14 +25,26 @@ public sealed class ProcessReadingsCommandHandler(
 
         var meterId = await GetOrCreateMeterWithCacheAsync(db, message.MeterNumber, ct);
 
+        var inserted = 0;
+        var skipped = 0;
+
         foreach (var (valueAt, value) in message.Readings)
         {
             if (await IsReadingCachedAsync(message.MeterNumber, valueAt, ct))
+            {
+                logger.LogDebug("Duplicate reading for meter {Meter} at {ValueAt} — skipping", message.MeterNumber, valueAt);
+                skipped++;
                 continue;
+            }
 
             await InsertReadingAsync(db, meterId, valueAt, value, ct);
             await CacheReadingAsync(message.MeterNumber, valueAt, ct);
+            inserted++;
         }
+
+        logger.LogInformation(
+            "Meter {Meter}: inserted {Inserted}, skipped {Skipped} duplicate(s)",
+            message.MeterNumber, inserted, skipped);
     }
 
     private async Task<long> GetOrCreateMeterWithCacheAsync(IDbConnection db, long meterNumber, CancellationToken ct)

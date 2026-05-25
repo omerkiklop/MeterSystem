@@ -29,3 +29,5 @@ spec:
               value: meter.readings
             - name: Database__ConnectionString
               value: "Host=postgres;Port=5432;Database=meters;Username=postgres;Password=postgres"
+            - name: Redis__ConnectionString
+              value: "redis:6379"

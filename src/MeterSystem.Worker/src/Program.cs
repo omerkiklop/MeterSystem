@@ -5,6 +5,7 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddMessaging(builder.Configuration);
 builder.Services.AddDatabase(builder.Configuration);
+builder.Services.AddCache(builder.Configuration);
 builder.Services.AddHostedService<MeterReadingsConsumer>();
 
 var host = builder.Build();

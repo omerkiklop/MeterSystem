@@ -1,6 +1,7 @@
 using System.Data;
 using Dapper;
 using MediatR;
+using MeterSystem.Worker.Cache;
 using MeterSystem.Worker.Configuration;
 using Microsoft.Extensions.Options;
 using Npgsql;
@@ -9,6 +10,7 @@ namespace MeterSystem.Worker.Commands;
 
 public sealed class ProcessReadingsCommandHandler(
     IOptions<DatabaseOptions> dbOptions,
+    IReadingsCache cache,
     ILogger<ProcessReadingsCommandHandler> logger)
     : IRequestHandler<ProcessReadingsCommand>
 {
@@ -21,12 +23,53 @@ public sealed class ProcessReadingsCommandHandler(
         await using var db = new NpgsqlConnection(_db.ConnectionString);
         await db.OpenAsync(ct);
 
-        var meterId = await GetOrCreateMeterAsync(db, message.MeterNumber, ct);
+        var meterId = await GetOrCreateMeterWithCacheAsync(db, message.MeterNumber, ct);
 
         foreach (var (valueAt, value) in message.Readings)
-            await InsertReadingAsync(db, meterId, valueAt, value, ct);
+        {
+            if (await IsReadingCachedAsync(message.MeterNumber, valueAt, ct))
+                continue;
 
-        logger.LogInformation("Persisted {Count} reading(s) for meter {Meter}", message.Readings.Count, message.MeterNumber);
+            await InsertReadingAsync(db, meterId, valueAt, value, ct);
+            await CacheReadingAsync(message.MeterNumber, valueAt, ct);
+        }
+    }
+
+    private async Task<long> GetOrCreateMeterWithCacheAsync(IDbConnection db, long meterNumber, CancellationToken ct)
+    {
+        try
+        {
+            var cached = await cache.GetMeterIdAsync(meterNumber, ct);
+            if (cached is not null)
+                return cached.Value;
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Redis unavailable for meter lookup — falling back to DB");
+        }
+
+        var meterId = await GetOrCreateMeterAsync(db, meterNumber, ct);
+
+        try { await cache.SetMeterIdAsync(meterNumber, meterId, ct); }
+        catch (Exception ex) { logger.LogWarning(ex, "Failed to cache meter_id for meter {Meter}", meterNumber); }
+
+        return meterId;
+    }
+
+    private async Task<bool> IsReadingCachedAsync(long meterNumber, DateTimeOffset valueAt, CancellationToken ct)
+    {
+        try { return await cache.IsReadingProcessedAsync(meterNumber, valueAt, ct); }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Redis unavailable for reading check — falling back to DB insert");
+            return false;
+        }
+    }
+
+    private async Task CacheReadingAsync(long meterNumber, DateTimeOffset valueAt, CancellationToken ct)
+    {
+        try { await cache.MarkReadingProcessedAsync(meterNumber, valueAt, ct); }
+        catch (Exception ex) { logger.LogWarning(ex, "Failed to cache reading for meter {Meter}", meterNumber); }
     }
 
     private static async Task<long> GetOrCreateMeterAsync(IDbConnection db, long meterNumber, CancellationToken ct)

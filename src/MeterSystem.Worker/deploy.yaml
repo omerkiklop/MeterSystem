@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metersystem-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metersystem-worker
+  template:
+    metadata:
+      labels:
+        app: metersystem-worker
+    spec:
+      containers:
+        - name: metersystem-worker
+          image: metersystem-worker:latest
+          imagePullPolicy: Never
+          env:
+            - name: RabbitMq__Host
+              value: rabbitmq
+            - name: RabbitMq__Port
+              value: "5672"
+            - name: RabbitMq__Username
+              value: guest
+            - name: RabbitMq__Password
+              value: guest
+            - name: RabbitMq__QueueName
+              value: meter.readings
+            - name: Database__ConnectionString
+              value: "Host=postgres;Port=5432;Database=meters;Username=postgres;Password=postgres"

@@ -12,6 +12,9 @@
     <Project Path="src/MeterSystem.Shared/MeterSystem.Shared.csproj" />
     <Project Path="src/MeterSystem.Worker/MeterSystem.Worker.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MeterSystem.Worker.IntegrationTests/MeterSystem.Worker.IntegrationTests.csproj" />
+  </Folder>
   <Folder Name="/queue/">
     <File Path="queue/deploy.yaml" />
   </Folder>

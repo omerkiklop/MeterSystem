@@ -1,15 +1,42 @@
 using MeterSystem.Api.Endpoints;
 using MeterSystem.Api.Extensions;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-builder.Services.AddMessaging(builder.Configuration);
-builder.Services.AddHealthChecks();
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+    builder.Host.UseSerilog((ctx, cfg) => cfg
+        .ReadFrom.Configuration(ctx.Configuration)
+        .Enrich.FromLogContext()
+        .Enrich.WithMachineName()
+        .Enrich.WithThreadId());
 
-app.MapHealthChecks("/health/live");
-app.MapHealthChecks("/health/ready");
-app.MapReadingsEndpoints();
+    builder.Services.AddMessaging(builder.Configuration);
+    builder.Services.AddHealthChecks();
 
-app.Run();
+    var app = builder.Build();
+
+    app.UseSerilogRequestLogging(opts =>
+    {
+        opts.MessageTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0}ms";
+    });
+
+    app.MapHealthChecks("/health/live");
+    app.MapHealthChecks("/health/ready");
+    app.MapReadingsEndpoints();
+
+    app.Run();
+}
+catch (Exception ex) when (ex is not HostAbortedException)
+{
+    Log.Fatal(ex, "API host terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

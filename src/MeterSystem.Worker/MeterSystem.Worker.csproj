@@ -7,17 +7,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="12.4.1"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0"/>
-        <PackageReference Include="RabbitMQ.Client" Version="6.8.1"/>
-        <PackageReference Include="Dapper" Version="2.1.66"/>
-        <PackageReference Include="Npgsql" Version="8.0.5"/>
-        <PackageReference Include="StackExchange.Redis" Version="2.8.0"/>
+        <PackageReference Include="MediatR" Version="12.4.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+        <PackageReference Include="Dapper" Version="2.1.66" />
+        <PackageReference Include="Npgsql" Version="8.0.5" />
+        <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+        <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MeterSystem.Shared\MeterSystem.Shared.csproj"/>
+        <ProjectReference Include="..\MeterSystem.Shared\MeterSystem.Shared.csproj" />
     </ItemGroup>
 
 </Project>

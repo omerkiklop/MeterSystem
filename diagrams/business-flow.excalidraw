@@ -1,0 +1,539 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "rect_1", "type": "rectangle",
+      "x": 200, "y": 80, "width": 400, "height": 180,
+      "angle": 0, "strokeColor": "#856404", "backgroundColor": "#fff3cd",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_1"}]
+    },
+    {
+      "id": "text_1", "type": "text",
+      "x": 210, "y": 90, "width": 380, "height": 160,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "POST /api/readings\n─────────────────────────────────\nBody: {meterNumber: long, readings: {'ISO8601': double}}\nValidates: meterNumber>0, timestamps ISO8601\n  values finite, readings not empty\nResponse: 202 Accepted | 400 {error: string}",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_1",
+      "originalText": "POST /api/readings\n─────────────────────────────────\nBody: {meterNumber: long, readings: {'ISO8601': double}}\nValidates: meterNumber>0, timestamps ISO8601\n  values finite, readings not empty\nResponse: 202 Accepted | 400 {error: string}"
+    },
+
+    {
+      "id": "rect_2", "type": "rectangle",
+      "x": 200, "y": 320, "width": 400, "height": 100,
+      "angle": 0, "strokeColor": "#004085", "backgroundColor": "#cce5ff",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_2"}]
+    },
+    {
+      "id": "text_2", "type": "text",
+      "x": 210, "y": 330, "width": 380, "height": 80,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "PublishReadingsCommand → MediatR\nPublishReadingsCommandHandler\n→ IReadingsPublisher.PublishAsync(message)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_2",
+      "originalText": "PublishReadingsCommand → MediatR\nPublishReadingsCommandHandler\n→ IReadingsPublisher.PublishAsync(message)"
+    },
+
+    {
+      "id": "rect_3", "type": "rectangle",
+      "x": 200, "y": 480, "width": 400, "height": 160,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "#e2e3e5",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_3"}]
+    },
+    {
+      "id": "text_3", "type": "text",
+      "x": 210, "y": 490, "width": 380, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "RabbitMqReadingsPublisher\nRabbitMQ.Client: connection.CreateModel()\nQueueDeclare: meter-readings\n  durable=true, autoDelete=false\nBasicPublish: exchange='', persistent=true\nBody: JsonSerializer.SerializeToUtf8Bytes(message)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_3",
+      "originalText": "RabbitMqReadingsPublisher\nRabbitMQ.Client: connection.CreateModel()\nQueueDeclare: meter-readings\n  durable=true, autoDelete=false\nBasicPublish: exchange='', persistent=true\nBody: JsonSerializer.SerializeToUtf8Bytes(message)"
+    },
+
+    {
+      "id": "rect_4", "type": "rectangle",
+      "x": 200, "y": 700, "width": 400, "height": 100,
+      "angle": 0, "strokeColor": "#6f42c1", "backgroundColor": "#e2d9f3",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_4"}]
+    },
+    {
+      "id": "text_4", "type": "text",
+      "x": 210, "y": 710, "width": 380, "height": 80,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "RabbitMQ Queue: meter-readings\nDurable: true | AutoAck: false | prefetchCount: 1",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_4",
+      "originalText": "RabbitMQ Queue: meter-readings\nDurable: true | AutoAck: false | prefetchCount: 1"
+    },
+
+    {
+      "id": "rect_5", "type": "rectangle",
+      "x": 200, "y": 860, "width": 400, "height": 180,
+      "angle": 0, "strokeColor": "#004085", "backgroundColor": "#cce5ff",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_5"}]
+    },
+    {
+      "id": "text_5", "type": "text",
+      "x": 210, "y": 870, "width": 380, "height": 160,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "MeterReadingsConsumer (BackgroundService)\nConsumeUntilCancelledAsync: reconnect loop (5s delay)\nHandleMessageAsync:\n  Deserialize JSON → MeterReadingMessage\n  BasicAck on success\n  BasicNack requeue=false → dead-letter (bad JSON)\n  BasicNack requeue=true → retry (other errors)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_5",
+      "originalText": "MeterReadingsConsumer (BackgroundService)\nConsumeUntilCancelledAsync: reconnect loop (5s delay)\nHandleMessageAsync:\n  Deserialize JSON → MeterReadingMessage\n  BasicAck on success\n  BasicNack requeue=false → dead-letter (bad JSON)\n  BasicNack requeue=true → retry (other errors)"
+    },
+
+    {
+      "id": "rect_6", "type": "rectangle",
+      "x": 200, "y": 1100, "width": 400, "height": 220,
+      "angle": 0, "strokeColor": "#004085", "backgroundColor": "#cce5ff",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_6"}]
+    },
+    {
+      "id": "text_6", "type": "text",
+      "x": 210, "y": 1110, "width": 380, "height": 200,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "ProcessReadingsCommand → MediatR\nProcessReadingsCommandHandler\n─────────────────────────────────\n1. GetOrCreateMeterWithCacheAsync:\n   Redis.GetMeterIdAsync → DB fallback if null\n   Redis.SetMeterIdAsync after DB hit\n2. Per reading:\n   IsReadingCachedAsync (Redis) → skip if hit\n   InsertReadingAsync (DB, ON CONFLICT DO NOTHING)\n   MarkReadingProcessedAsync (Redis)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_6",
+      "originalText": "ProcessReadingsCommand → MediatR\nProcessReadingsCommandHandler\n─────────────────────────────────\n1. GetOrCreateMeterWithCacheAsync:\n   Redis.GetMeterIdAsync → DB fallback if null\n   Redis.SetMeterIdAsync after DB hit\n2. Per reading:\n   IsReadingCachedAsync (Redis) → skip if hit\n   InsertReadingAsync (DB, ON CONFLICT DO NOTHING)\n   MarkReadingProcessedAsync (Redis)"
+    },
+
+    {
+      "id": "rect_7", "type": "rectangle",
+      "x": 680, "y": 1100, "width": 360, "height": 300,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "#e2e3e5",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_7"}]
+    },
+    {
+      "id": "text_7", "type": "text",
+      "x": 690, "y": 1110, "width": 340, "height": 280,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Redis · IReadingsCache / RedisReadingsCache\n─────────────────────────────────\nGetMeterIdAsync(meterNumber)\n  Key: meter:{meterNumber} → long?\n  TTL: 1 hour\nSetMeterIdAsync(meterNumber, meterId)\n  Key: meter:{meterNumber}\nIsReadingProcessedAsync(meterNumber, valueAt)\n  Key: reading:{n}:{unixMs} → bool\n  TTL: 24 hours\nMarkReadingProcessedAsync(meterNumber, valueAt)\n  Key: reading:{n}:{unixMs} = '1'\nFallback: log warning + continue if Redis unavailable",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_7",
+      "originalText": "Redis · IReadingsCache / RedisReadingsCache\n─────────────────────────────────\nGetMeterIdAsync(meterNumber)\n  Key: meter:{meterNumber} → long?\n  TTL: 1 hour\nSetMeterIdAsync(meterNumber, meterId)\n  Key: meter:{meterNumber}\nIsReadingProcessedAsync(meterNumber, valueAt)\n  Key: reading:{n}:{unixMs} → bool\n  TTL: 24 hours\nMarkReadingProcessedAsync(meterNumber, valueAt)\n  Key: reading:{n}:{unixMs} = '1'\nFallback: log warning + continue if Redis unavailable"
+    },
+
+    {
+      "id": "rect_8", "type": "rectangle",
+      "x": 200, "y": 1380, "width": 400, "height": 140,
+      "angle": 0, "strokeColor": "#155724", "backgroundColor": "#d4edda",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_8"}]
+    },
+    {
+      "id": "text_8", "type": "text",
+      "x": 210, "y": 1390, "width": 380, "height": 120,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "GetOrCreateMeterAsync(db, meterNumber)\nSQL: INSERT INTO meters (meter_number)\n  ON CONFLICT (meter_number) DO NOTHING;\nSELECT meter_id FROM meters\n  WHERE meter_number = @MeterNumber\nReturns: meter_id: long",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_8",
+      "originalText": "GetOrCreateMeterAsync(db, meterNumber)\nSQL: INSERT INTO meters (meter_number)\n  ON CONFLICT (meter_number) DO NOTHING;\nSELECT meter_id FROM meters\n  WHERE meter_number = @MeterNumber\nReturns: meter_id: long"
+    },
+
+    {
+      "id": "rect_9", "type": "rectangle",
+      "x": 200, "y": 1580, "width": 400, "height": 140,
+      "angle": 0, "strokeColor": "#155724", "backgroundColor": "#d4edda",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_9"}]
+    },
+    {
+      "id": "text_9", "type": "text",
+      "x": 210, "y": 1590, "width": 380, "height": 120,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "InsertReadingAsync(db, meterId, valueAt, value)\nSQL: INSERT INTO meter_readings\n  (meter_id, value_at, value)\n  VALUES (@MeterId, @ValueAt, @Value)\n  ON CONFLICT (meter_id, value_at) DO NOTHING",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_9",
+      "originalText": "InsertReadingAsync(db, meterId, valueAt, value)\nSQL: INSERT INTO meter_readings\n  (meter_id, value_at, value)\n  VALUES (@MeterId, @ValueAt, @Value)\n  ON CONFLICT (meter_id, value_at) DO NOTHING"
+    },
+
+    {
+      "id": "rect_10", "type": "rectangle",
+      "x": 680, "y": 1440, "width": 360, "height": 120,
+      "angle": 0, "strokeColor": "#721c24", "backgroundColor": "#f8d7da",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_10"}]
+    },
+    {
+      "id": "text_10", "type": "text",
+      "x": 690, "y": 1450, "width": 340, "height": 100,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "meters\n───────────────────────\nmeter_id BIGINT GENERATED ALWAYS AS IDENTITY PK\nmeter_number BIGINT UNIQUE",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_10",
+      "originalText": "meters\n───────────────────────\nmeter_id BIGINT GENERATED ALWAYS AS IDENTITY PK\nmeter_number BIGINT UNIQUE"
+    },
+
+    {
+      "id": "rect_11", "type": "rectangle",
+      "x": 680, "y": 1600, "width": 360, "height": 160,
+      "angle": 0, "strokeColor": "#721c24", "backgroundColor": "#f8d7da",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "text_11"}]
+    },
+    {
+      "id": "text_11", "type": "text",
+      "x": 690, "y": 1610, "width": 340, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "meter_readings\n───────────────────────\nmeter_id BIGINT FK → meters\nvalue_at TIMESTAMPTZ\nvalue NUMERIC\nreceived_at_utc TIMESTAMPTZ DEFAULT NOW()\nPK: (meter_id, value_at)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "rect_11",
+      "originalText": "meter_readings\n───────────────────────\nmeter_id BIGINT FK → meters\nvalue_at TIMESTAMPTZ\nvalue NUMERIC\nreceived_at_utc TIMESTAMPTZ DEFAULT NOW()\nPK: (meter_id, value_at)"
+    },
+
+    {
+      "id": "arrow_1", "type": "arrow",
+      "x": 400, "y": 260, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_1", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_2", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_1", "type": "text",
+      "x": 406, "y": 278, "width": 240, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "MediatR.Send(PublishReadingsCommand)",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "MediatR.Send(PublishReadingsCommand)"
+    },
+
+    {
+      "id": "arrow_2", "type": "arrow",
+      "x": 400, "y": 420, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_2", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_3", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_2", "type": "text",
+      "x": 406, "y": 438, "width": 200, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "publisher.PublishAsync(message)",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "publisher.PublishAsync(message)"
+    },
+
+    {
+      "id": "arrow_3", "type": "arrow",
+      "x": 400, "y": 640, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_3", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_4", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_3", "type": "text",
+      "x": 406, "y": 658, "width": 220, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "BasicPublish(JSON body, persistent=true)",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "BasicPublish(JSON body, persistent=true)"
+    },
+
+    {
+      "id": "arrow_4", "type": "arrow",
+      "x": 400, "y": 800, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_4", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_5", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_4", "type": "text",
+      "x": 406, "y": 818, "width": 220, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "BasicConsume (AsyncEventingBasicConsumer)",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "BasicConsume (AsyncEventingBasicConsumer)"
+    },
+
+    {
+      "id": "arrow_5", "type": "arrow",
+      "x": 400, "y": 1040, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_5", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_6", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_5", "type": "text",
+      "x": 406, "y": 1058, "width": 220, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "MediatR.Send(ProcessReadingsCommand)",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "MediatR.Send(ProcessReadingsCommand)"
+    },
+
+    {
+      "id": "arrow_6", "type": "arrow",
+      "x": 600, "y": 1210, "width": 80, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[80,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_6", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_7", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_6", "type": "text",
+      "x": 604, "y": 1192, "width": 280, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "GetMeterIdAsync / IsReadingProcessedAsync / MarkReadingProcessedAsync",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "GetMeterIdAsync / IsReadingProcessedAsync / MarkReadingProcessedAsync"
+    },
+
+    {
+      "id": "arrow_7", "type": "arrow",
+      "x": 400, "y": 1320, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_6", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_8", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_7", "type": "text",
+      "x": 406, "y": 1338, "width": 220, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "cache miss → DB fallback",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "cache miss → DB fallback"
+    },
+
+    {
+      "id": "arrow_8", "type": "arrow",
+      "x": 600, "y": 1450, "width": 80, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[80,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_8", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_10", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_8", "type": "text",
+      "x": 604, "y": 1432, "width": 200, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "INSERT / SELECT meters",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "INSERT / SELECT meters"
+    },
+
+    {
+      "id": "arrow_9", "type": "arrow",
+      "x": 400, "y": 1520, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_8", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_9", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_9", "type": "text",
+      "x": 406, "y": 1538, "width": 220, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "per reading (not in Redis cache)",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "per reading (not in Redis cache)"
+    },
+
+    {
+      "id": "arrow_10", "type": "arrow",
+      "x": 600, "y": 1650, "width": 80, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[80,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "rect_9", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "rect_11", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_10", "type": "text",
+      "x": 604, "y": 1632, "width": 260, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "INSERT meter_readings ON CONFLICT DO NOTHING",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "INSERT meter_readings ON CONFLICT DO NOTHING"
+    },
+
+    {
+      "id": "lbl_api", "type": "text",
+      "x": 200, "y": 42, "width": 400, "height": 28,
+      "angle": 0, "strokeColor": "#856404", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 14, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── MeterSystem.Api ──",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── MeterSystem.Api ──"
+    },
+    {
+      "id": "lbl_queue", "type": "text",
+      "x": 200, "y": 662, "width": 400, "height": 28,
+      "angle": 0, "strokeColor": "#6f42c1", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 14, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── RabbitMQ ──",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── RabbitMQ ──"
+    },
+    {
+      "id": "lbl_worker", "type": "text",
+      "x": 200, "y": 822, "width": 400, "height": 28,
+      "angle": 0, "strokeColor": "#004085", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 14, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── MeterSystem.Worker ──",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── MeterSystem.Worker ──"
+    },
+    {
+      "id": "lbl_redis", "type": "text",
+      "x": 680, "y": 1062, "width": 360, "height": 28,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 14, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── Redis (Idempotency) ──",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── Redis (Idempotency) ──"
+    },
+    {
+      "id": "lbl_pg", "type": "text",
+      "x": 200, "y": 1342, "width": 400, "height": 28,
+      "angle": 0, "strokeColor": "#155724", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 14, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── PostgreSQL (Dapper + Npgsql) ──",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── PostgreSQL (Dapper + Npgsql) ──"
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

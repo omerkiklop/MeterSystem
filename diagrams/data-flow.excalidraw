@@ -1,0 +1,452 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+
+    {
+      "id": "df_r1", "type": "rectangle",
+      "x": 40, "y": 100, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#856404", "backgroundColor": "#fff3cd",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t1"}]
+    },
+    {
+      "id": "df_t1", "type": "text",
+      "x": 50, "y": 110, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Client sends\nPOST /api/readings\n{\n  meterNumber: long (req)\n  readings: {\n    'ISO8601': double\n  } (req)\n}",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r1",
+      "originalText": "Client sends\nPOST /api/readings\n{\n  meterNumber: long (req)\n  readings: {\n    'ISO8601': double\n  } (req)\n}"
+    },
+
+    {
+      "id": "df_r2", "type": "rectangle",
+      "x": 290, "y": 100, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#856404", "backgroundColor": "#fff3cd",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t2"}]
+    },
+    {
+      "id": "df_t2", "type": "text",
+      "x": 300, "y": 110, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Validate:\n✓ meterNumber > 0\n✓ readings not empty\n✓ each key ISO 8601\n✓ each value finite\n✗ any fail →\n  400 {error: string}",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r2",
+      "originalText": "Validate:\n✓ meterNumber > 0\n✓ readings not empty\n✓ each key ISO 8601\n✓ each value finite\n✗ any fail →\n  400 {error: string}"
+    },
+
+    {
+      "id": "df_r3", "type": "rectangle",
+      "x": 540, "y": 100, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#e65100", "backgroundColor": "#fff3e0",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t3"}]
+    },
+    {
+      "id": "df_t3", "type": "text",
+      "x": 550, "y": 110, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Transform:\nstring keys →\n  DateTimeOffset.Parse\nDictionary<string,double>\n→\nIReadOnlyDictionary\n<DateTimeOffset,double>\nWraps: MeterReadingMessage",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r3",
+      "originalText": "Transform:\nstring keys →\n  DateTimeOffset.Parse\nDictionary<string,double>\n→\nIReadOnlyDictionary\n<DateTimeOffset,double>\nWraps: MeterReadingMessage"
+    },
+
+    {
+      "id": "df_r4", "type": "rectangle",
+      "x": 790, "y": 100, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "#e2e3e5",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t4"}]
+    },
+    {
+      "id": "df_t4", "type": "text",
+      "x": 800, "y": 110, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Publish to RabbitMQ\nQueue: meter-readings\nBody: JSON{\n  meterNumber: long\n  readings: {...}\n}\nPersistent: true\nExchange: '' (default)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r4",
+      "originalText": "Publish to RabbitMQ\nQueue: meter-readings\nBody: JSON{\n  meterNumber: long\n  readings: {...}\n}\nPersistent: true\nExchange: '' (default)"
+    },
+
+    {
+      "id": "df_r5", "type": "rectangle",
+      "x": 1040, "y": 100, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#856404", "backgroundColor": "#fff3cd",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t5"}]
+    },
+    {
+      "id": "df_t5", "type": "text",
+      "x": 1050, "y": 110, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Returns 202 Accepted\n{}\n\n(fire-and-forget;\nworker processes\nasynchronously)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r5",
+      "originalText": "Returns 202 Accepted\n{}\n\n(fire-and-forget;\nworker processes\nasynchronously)"
+    },
+
+    {
+      "id": "df_err1", "type": "rectangle",
+      "x": 290, "y": 320, "width": 200, "height": 80,
+      "angle": 0, "strokeColor": "#dc3545", "backgroundColor": "#f8d7da",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_terr1"}]
+    },
+    {
+      "id": "df_terr1", "type": "text",
+      "x": 300, "y": 330, "width": 180, "height": 60,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Returns 400:\n{error: 'message'}\nWhen: validation fails",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_err1",
+      "originalText": "Returns 400:\n{error: 'message'}\nWhen: validation fails"
+    },
+
+    {
+      "id": "df_r6", "type": "rectangle",
+      "x": 40, "y": 480, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#6f42c1", "backgroundColor": "#e2d9f3",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t6"}]
+    },
+    {
+      "id": "df_t6", "type": "text",
+      "x": 50, "y": 490, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "RabbitMQ Consume\nQueue: meter-readings\nprefetchCount: 1\nautoAck: false\nDeserialize JSON\n→ MeterReadingMessage\nNack (dead-letter)\n  on bad JSON",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r6",
+      "originalText": "RabbitMQ Consume\nQueue: meter-readings\nprefetchCount: 1\nautoAck: false\nDeserialize JSON\n→ MeterReadingMessage\nNack (dead-letter)\n  on bad JSON"
+    },
+
+    {
+      "id": "df_r7", "type": "rectangle",
+      "x": 290, "y": 480, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "#e2e3e5",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t7"}]
+    },
+    {
+      "id": "df_t7", "type": "text",
+      "x": 300, "y": 490, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Redis Idempotency\nGetMeterIdAsync\n  meter:{n} → long?\nIsReadingProcessedAsync\n  reading:{n}:{ms} → bool\n✓ hit → skip reading\n✗ miss → proceed to DB\nFallback to DB if down",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r7",
+      "originalText": "Redis Idempotency\nGetMeterIdAsync\n  meter:{n} → long?\nIsReadingProcessedAsync\n  reading:{n}:{ms} → bool\n✓ hit → skip reading\n✗ miss → proceed to DB\nFallback to DB if down"
+    },
+
+    {
+      "id": "df_r8", "type": "rectangle",
+      "x": 540, "y": 480, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#155724", "backgroundColor": "#d4edda",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t8"}]
+    },
+    {
+      "id": "df_t8", "type": "text",
+      "x": 550, "y": 490, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "DB Upsert (PostgreSQL)\nINSERT INTO meters\n  ON CONFLICT DO NOTHING\nSELECT meter_id\nINSERT INTO meter_readings\n  ON CONFLICT\n  (meter_id, value_at)\n  DO NOTHING",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r8",
+      "originalText": "DB Upsert (PostgreSQL)\nINSERT INTO meters\n  ON CONFLICT DO NOTHING\nSELECT meter_id\nINSERT INTO meter_readings\n  ON CONFLICT\n  (meter_id, value_at)\n  DO NOTHING"
+    },
+
+    {
+      "id": "df_r9", "type": "rectangle",
+      "x": 790, "y": 480, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "#e2e3e5",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t9"}]
+    },
+    {
+      "id": "df_t9", "type": "text",
+      "x": 800, "y": 490, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Redis Cache Update\nSetMeterIdAsync\n  meter:{n} (TTL 1h)\nMarkReadingProcessedAsync\n  reading:{n}:{ms} = '1'\n  (TTL 24h)\nFire-and-forget\n  (logged on failure)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r9",
+      "originalText": "Redis Cache Update\nSetMeterIdAsync\n  meter:{n} (TTL 1h)\nMarkReadingProcessedAsync\n  reading:{n}:{ms} = '1'\n  (TTL 24h)\nFire-and-forget\n  (logged on failure)"
+    },
+
+    {
+      "id": "df_r10", "type": "rectangle",
+      "x": 1040, "y": 480, "width": 200, "height": 160,
+      "angle": 0, "strokeColor": "#155724", "backgroundColor": "#d4edda",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_t10"}]
+    },
+    {
+      "id": "df_t10", "type": "text",
+      "x": 1050, "y": 490, "width": 180, "height": 140,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "BasicAck → RabbitMQ\nDelivery confirmed\nOn error:\n  BasicNack requeue=true\n  (consumer retries\n   after reconnect)",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_r10",
+      "originalText": "BasicAck → RabbitMQ\nDelivery confirmed\nOn error:\n  BasicNack requeue=true\n  (consumer retries\n   after reconnect)"
+    },
+
+    {
+      "id": "df_skip", "type": "rectangle",
+      "x": 290, "y": 700, "width": 200, "height": 80,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "#e2e3e5",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "dashed",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "roundness": {"type": 3},
+      "boundElements": [{"type": "text", "id": "df_tskip"}]
+    },
+    {
+      "id": "df_tskip", "type": "text",
+      "x": 300, "y": 710, "width": 180, "height": 60,
+      "angle": 0, "strokeColor": "#1e1e2e", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 12, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "Skip reading (no-op)\nWhen: Redis cache hit\nreading:{n}:{ms} exists",
+      "textAlign": "center", "verticalAlign": "middle",
+      "containerId": "df_skip",
+      "originalText": "Skip reading (no-op)\nWhen: Redis cache hit\nreading:{n}:{ms} exists"
+    },
+
+    {
+      "id": "dfa_1", "type": "arrow",
+      "x": 240, "y": 180, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r1", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r2", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_2", "type": "arrow",
+      "x": 490, "y": 180, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r2", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r3", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_3", "type": "arrow",
+      "x": 740, "y": 180, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r3", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r4", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_4", "type": "arrow",
+      "x": 990, "y": 180, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r4", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r5", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_err1", "type": "arrow",
+      "x": 390, "y": 260, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#dc3545", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r2", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_err1", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_err1", "type": "text",
+      "x": 396, "y": 278, "width": 110, "height": 20,
+      "angle": 0, "strokeColor": "#dc3545", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "validation fails",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "validation fails"
+    },
+
+    {
+      "id": "dfa_5", "type": "arrow",
+      "x": 240, "y": 560, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r6", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r7", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_6", "type": "arrow",
+      "x": 490, "y": 560, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r7", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r8", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_w6", "type": "text",
+      "x": 496, "y": 543, "width": 100, "height": 20,
+      "angle": 0, "strokeColor": "#555", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "cache miss",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "cache miss"
+    },
+
+    {
+      "id": "dfa_7", "type": "arrow",
+      "x": 740, "y": 560, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r8", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r9", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_8", "type": "arrow",
+      "x": 990, "y": 560, "width": 50, "height": 0,
+      "angle": 0, "strokeColor": "#333", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[50,0]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r9", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_r10", "focus": 0, "gap": 6}
+    },
+
+    {
+      "id": "dfa_skip", "type": "arrow",
+      "x": 390, "y": 640, "width": 0, "height": 60,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 2, "strokeStyle": "dashed",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "points": [[0,0],[0,60]],
+      "startArrowhead": null, "endArrowhead": "arrow",
+      "startBinding": {"elementId": "df_r7", "focus": 0, "gap": 6},
+      "endBinding": {"elementId": "df_skip", "focus": 0, "gap": 6}
+    },
+    {
+      "id": "albl_skip", "type": "text",
+      "x": 396, "y": 658, "width": 100, "height": 20,
+      "angle": 0, "strokeColor": "#383d41", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 11, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "cache hit",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "cache hit"
+    },
+
+    {
+      "id": "lbl_row1", "type": "text",
+      "x": 40, "y": 62, "width": 340, "height": 28,
+      "angle": 0, "strokeColor": "#856404", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 13, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── API Path (MeterSystem.Api) ──",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── API Path (MeterSystem.Api) ──"
+    },
+    {
+      "id": "lbl_row2", "type": "text",
+      "x": 40, "y": 442, "width": 380, "height": 28,
+      "angle": 0, "strokeColor": "#004085", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 1, "opacity": 100, "groupIds": [], "frameId": null,
+      "fontSize": 13, "fontFamily": 1, "lineHeight": 1.4,
+      "text": "── Worker Path (MeterSystem.Worker) ──",
+      "textAlign": "left", "verticalAlign": "middle",
+      "containerId": null, "originalText": "── Worker Path (MeterSystem.Worker) ──"
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

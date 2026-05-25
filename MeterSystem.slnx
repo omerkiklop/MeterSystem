@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="global.json" />
+    <File Path="Instructions.md" />
+    <File Path="deploy.sh" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/MeterSystem.Api/MeterSystem.Api.csproj" />
+    <Project Path="src/MeterSystem.Shared/MeterSystem.Shared.csproj" />
+    <Project Path="src/MeterSystem.Worker/MeterSystem.Worker.csproj" />
+  </Folder>
+  <Folder Name="/queue/">
+    <File Path="queue/deploy.yaml" />
+  </Folder>
+  <Folder Name="/database/">
+    <File Path="database/schema.sql" />
+    <File Path="database/deploy.yaml" />
+  </Folder>
+</Solution>
